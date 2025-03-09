@@ -1,0 +1,60 @@
+﻿@model CreateDatabaseModel
+@{
+    ViewData["Title"] = "Crear Base de Datos";
+}
+<div class="container mt-4">
+    <h2 class="mb-4">Crear Base de Datos</h2>
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success mt-3">@ViewBag.Message</div>
+    }
+    <form asp-action="Create" method="post" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label class="form-label">Nombre de la Base de Datos</label>
+            <input asp-for="DatabaseName" class="form-control" required />
+            <span asp-validation-for="DatabaseName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Ubicación del Archivo de Datos</label>
+            <div class="input-group">
+                <input asp-for="DataFilePath" class="form-control" required />
+            </div>
+            <span asp-validation-for="DataFilePath" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Ubicación del Archivo de Log</label>
+            <div class="input-group">
+                <input asp-for="LogFilePath" class="form-control" required />
+            </div>
+            <span asp-validation-for="LogFilePath" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Tamaño de Datos (MB)</label>
+            <input asp-for="DataSize" type="number" class="form-control" required min="10" />
+            <span asp-validation-for="DataSize" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Crecimiento de Archivo de Datos (%)</label>
+            <input asp-for="DataFileGrowth" type="number" class="form-control" required min="5" />
+            <span asp-validation-for="DataFileGrowth" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Tamaño de Log (MB)</label>
+            <input asp-for="LogSize" type="number" class="form-control" required />
+            <span asp-validation-for="LogSize" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Crecimiento de Archivo de Log</label>
+            <input asp-for="LogFileGrowth" class="form-control" required min="5" />
+            <span asp-validation-for="LogFileGrowth" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">FileGroup Secundario (Opcional)</label>
+            <input asp-for="FileGroupAdicional" class="form-control" />
+            <span asp-validation-for="FileGroupAdicional" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Crear</button>
+    </form>
+
+</div>
