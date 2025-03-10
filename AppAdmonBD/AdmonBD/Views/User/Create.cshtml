@@ -1,0 +1,69 @@
+﻿@model AdmonBD.Models.UserModel
+@{
+    ViewData["Title"] = "Crear Usuario";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Crear Usuario</h2>
+    <form asp-action="Create" method="post" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label class="form-label">Nombre del Login</label>
+            <input asp-for="LoginName" class="form-control" required />
+            <div class="invalid-feedback">El nombre del login es obligatorio.</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Contraseña</label>
+            <input asp-for="Password" class="form-control" type="password" required />
+            <div class="invalid-feedback">La contraseña es obligatoria.</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Nombre de Usuario</label>
+            <input asp-for="UserName" class="form-control" required />
+            <div class="invalid-feedback">El nombre de usuario es obligatorio.</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Seleccionar Base de Datos</label>
+            <select id="DatabaseSelect" asp-for="AssignedDatabases" asp-items="@(new SelectList(ViewBag.Databases))" class="form-control" multiple required>
+            </select>
+            <div class="invalid-feedback">Debe seleccionar al menos una base de datos.</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Seleccionar Tablas</label>
+            <select id="TableSelect" asp-for="AssignedTables" class="form-control" multiple>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Permisos a Nivel de Servidor</label>
+            <select asp-for="ServerPermissions" asp-items="@(new SelectList(ViewBag.ServerPermissions))" class="form-control" multiple>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Permisos a Nivel de Base de Datos</label>
+            <select asp-for="DatabasePermissions" asp-items="@(new SelectList(ViewBag.DatabasePermissions))" class="form-control" multiple>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Crear</button>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        // Validación del formulario
+        (function () {
+            'use strict';
+
+            // Obtener el formulario
+            var form = document.querySelector('.needs-validation');
+
+            // Agregar validación personalizada
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+
+                form.classList.add('was-validated');
+            }, false);
+        })();
+    </script>
+}

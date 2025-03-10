@@ -1,0 +1,46 @@
+﻿@model List<AdmonBD.Models.CreateDatabaseModel>
+
+@{
+    ViewBag.Title = "Gestión de Bases de Datos";
+}
+
+<div class="container">
+    <h2 class="mt-4">Gestión de Bases de Datos</h2>
+
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <div class="alert @(ViewBag.IsSuccess ? "alert-success" : "alert-danger")">
+            @ViewBag.Message
+        </div>
+    }
+
+    <div class="mb-3">
+        <a href="@Url.Action("Create", "Database")" class="btn btn-primary">Crear Nueva Base de Datos</a>
+    </div>
+
+    <!-- Tabla de usuarios -->
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th>Nombre de la Base de Datos</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var database in Model)
+                {
+                    <tr>
+                        <td>@database.DatabaseName</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" class="text-center">No hay usuarios registrados.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

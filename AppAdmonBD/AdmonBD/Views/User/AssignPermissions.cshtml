@@ -1,0 +1,40 @@
+﻿@model UserModel
+@{
+    Layout = "_Layout";
+}
+
+<h2>Asignar Permisos</h2>
+
+<form method="post" action="/User/AssignPermissions">
+    <div class="form-group">
+        <label for="DatabaseName">Base de Datos</label>
+        <select id="DatabaseName" name="DatabaseName" class="form-control">
+            @foreach (var db in Model.AssignedDatabases)
+            {
+                <option value="@db">@db</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="TableName">Tabla</label>
+        <select id="TableName" name="TableName" class="form-control">
+            @foreach (var table in Model.AssignedTables)
+            {
+                <option value="@table">@table</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="Permission">Permiso</label>
+        <select id="Permission" name="Permission" class="form-control">
+            <option value="SELECT">SELECT</option>
+            <option value="INSERT">INSERT</option>
+            <option value="UPDATE">UPDATE</option>
+            <option value="DELETE">DELETE</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Asignar Permisos</button>
+</form>

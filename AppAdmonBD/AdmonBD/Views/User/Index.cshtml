@@ -1,0 +1,49 @@
+﻿@model List<AdmonBD.Models.UserModel>
+
+@{
+    ViewBag.Title = "Gestión de Usuarios";
+}
+
+<div class="container">
+    <h2 class="mt-4">Gestión de Usuarios</h2>
+
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <div class="alert @(ViewBag.IsSuccess ? "alert-success" : "alert-danger")">
+            @ViewBag.Message
+        </div>
+    }
+    <div class="mb-3">
+        <a href="@Url.Action("Create", "User")" class="btn btn-primary">Crear Nuevo Usuario y Login</a>
+    </div>
+
+    <!-- Tabla de usuarios -->
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th>Login</th>
+                <th>Usuario</th>
+                <th>Bases de Datos</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.LoginName</td>
+                        <td>@user.UserName</td>
+                        <td>@(user.AssignedDatabases != null ? string.Join(", ", user.AssignedDatabases) : "N/A")</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="3" class="text-center">No hay usuarios registrados.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
