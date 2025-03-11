@@ -2,7 +2,7 @@ CREATE OR ALTER PROCEDURE sp_CreateLoginAndUser
     @LoginName NVARCHAR(128),
     @Password NVARCHAR(128),
     @UserName NVARCHAR(128),
-    @Databases NVARCHAR(MAX) -- Lista de bases de datos separadas por coma
+    @Databases NVARCHAR(MAX) 
 AS
 BEGIN
     -- Crear Login
@@ -23,11 +23,11 @@ BEGIN
 
     WHILE @@FETCH_STATUS = 0
     BEGIN
-        -- Crear Usuario en la base de datos específica
+        -- Crear Usuario en la base de datos especifica
         SET @SQL = 'USE ' + @Database + '; CREATE USER ' + @UserName + ' FOR LOGIN ' + @LoginName;
         EXEC sp_executesql @SQL;
 
-        -- Asignar permisos básicos (por ejemplo, db_datareader y db_datawriter)
+        -- Asignar permisos basicos (por ejemplo, db_datareader y db_datawriter)
         SET @SQL = 'USE ' + @Database + '; EXEC sp_addrolemember ''db_datareader'', ''' + @UserName + ''';';
         EXEC sp_executesql @SQL;
 
@@ -108,7 +108,7 @@ BEGIN
     FROM sys.server_principals sp
     LEFT JOIN sys.database_principals dp 
         ON sp.sid = dp.sid
-    WHERE sp.type IN ('S', 'U') -- Filtra solo logins de tipo SQL y Windows
+    WHERE sp.type IN ('S', 'U')
     ORDER BY sp.name;
 END
 GO
@@ -131,7 +131,7 @@ AS
 BEGIN
     SELECT permission_name
     FROM sys.server_permissions
-    WHERE class = 0 -- Permisos a nivel de servidor
+    WHERE class = 0 
 END
 GO
 
@@ -141,7 +141,7 @@ AS
 BEGIN
     SELECT permission_name
     FROM sys.database_permissions
-    WHERE class = 0 -- Permisos a nivel de base de datos
+    WHERE class = 0 
 END
 GO
 
@@ -153,7 +153,6 @@ AS
 BEGIN
     DECLARE @SQL NVARCHAR(MAX);
     
-    -- Asegúrate de que el permiso sea válido
     IF @Permission IN ('bulkadmin', 'dbcreator', 'diskadmin', 'processadmin', 'public', 'securityadmin', 'serveradmin', 'setupadmin', 'sysadmin')
     BEGIN
         SET @SQL = 'ALTER SERVER ROLE ' + QUOTENAME(@Permission) + ' ADD MEMBER ' + QUOTENAME(@LoginName);
@@ -161,7 +160,7 @@ BEGIN
     END
     ELSE
     BEGIN
-        RAISERROR('Permiso no válido: %s', 16, 1, @Permission);
+        RAISERROR('Permiso no vï¿½lido: %s', 16, 1, @Permission);
     END
 END
 GO
@@ -173,29 +172,6 @@ CREATE OR ALTER PROCEDURE sp_AssignDatabasePermissions
 AS
 BEGIN
     DECLARE @SQL NVARCHAR(MAX);
-    
-    -- Asegúrate de que el permiso sea válido
-    IF @Permission IN ('db_accessadmin', 'db_backupoperator', 'db_datareader', 'db_datawriter', 'db_ddladmin', 'db_denydatareader', 'db_denydatawriter', 'db_owner', 'db_securityadmin', 'public')
-    BEGIN
-        SET @SQL = 'USE ' + QUOTENAME(@DatabaseName) + '; EXEC sp_addrolemember @rolename = ' + QUOTENAME(@Permission) + ', @membername = ' + QUOTENAME(@UserName);
-        EXEC sp_executesql @SQL;
-    END
-    ELSE
-    BEGIN
-        RAISERROR('Permiso no válido: %s', 16, 1, @Permission);
-    END
-END
-GO
-
-CREATE OR ALTER PROCEDURE sp_AssignDatabasePermissions
-    @UserName NVARCHAR(128),
-    @DatabaseName NVARCHAR(128),
-    @Permission NVARCHAR(128)
-AS
-BEGIN
-    DECLARE @SQL NVARCHAR(MAX);
-    
-    -- Asegúrate de que el permiso sea válido y no sea 'public'
     IF @Permission IN ('db_accessadmin', 'db_backupoperator', 'db_datareader', 'db_datawriter', 'db_ddladmin', 'db_denydatareader', 'db_denydatawriter', 'db_owner', 'db_securityadmin')
     BEGIN
         SET @SQL = 'USE ' + QUOTENAME(@DatabaseName) + '; EXEC sp_addrolemember @rolename = ' + QUOTENAME(@Permission) + ', @membername = ' + QUOTENAME(@UserName);
@@ -203,27 +179,12 @@ BEGIN
     END
     ELSE IF @Permission = 'public'
     BEGIN
-        -- No hacer nada, ya que todos los usuarios pertenecen automáticamente al rol 'public'
+        -- No hacer nada, ya que todos los usuarios pertenecen automï¿½ticamente al rol 'public'
         PRINT 'El rol "public" no puede ser asignado manualmente.';
     END
     ELSE
     BEGIN
-        RAISERROR('Permiso no válido: %s', 16, 1, @Permission);
+        RAISERROR('Permiso no vï¿½lido: %s', 16, 1, @Permission);
     END
-END
-GO
-
-CREATE OR ALTER PROCEDURE sp_GetTablesForDatabase
-    @DatabaseName NVARCHAR(128)
-AS
-BEGIN
-    DECLARE @SQL NVARCHAR(MAX);
-
-    -- Construir la consulta dinámica para obtener las tablas de la base de datos seleccionada
-    SET @SQL = 'USE ' + QUOTENAME(@DatabaseName) + '; ' +
-               'SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = ''BASE TABLE'';';
-
-    -- Ejecutar la consulta dinámica
-    EXEC sp_executesql @SQL;
 END
 GO
