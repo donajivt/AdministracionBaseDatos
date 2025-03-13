@@ -3,28 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\vania\\OneDrive\\Documentos\\AdministracionBD\\AppAdmonBD\\AdmonBD\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E0E116E4-6D3A-438C-B5D8-76BB4C5C0934}|AdmonBD.csproj|c:\\users\\vania\\onedrive\\documentos\\administracionbd\\appadmonbd\\admonbd\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E0E116E4-6D3A-438C-B5D8-76BB4C5C0934}|AdmonBD.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E0E116E4-6D3A-438C-B5D8-76BB4C5C0934}|AdmonBD.csproj|c:\\users\\vania\\onedrive\\documentos\\administracionbd\\appadmonbd\\admonbd\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{E0E116E4-6D3A-438C-B5D8-76BB4C5C0934}|AdmonBD.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E0E116E4-6D3A-438C-B5D8-76BB4C5C0934}|AdmonBD.csproj|c:\\users\\vania\\onedrive\\documentos\\administracionbd\\appadmonbd\\admonbd\\models\\usermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E0E116E4-6D3A-438C-B5D8-76BB4C5C0934}|AdmonBD.csproj|solutionrelative:models\\usermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E0E116E4-6D3A-438C-B5D8-76BB4C5C0934}|AdmonBD.csproj|c:\\users\\vania\\onedrive\\documentos\\administracionbd\\appadmonbd\\admonbd\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{E0E116E4-6D3A-438C-B5D8-76BB4C5C0934}|AdmonBD.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E0E116E4-6D3A-438C-B5D8-76BB4C5C0934}|AdmonBD.csproj|c:\\users\\vania\\onedrive\\documentos\\administracionbd\\appadmonbd\\admonbd\\models\\loginusuariomodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E0E116E4-6D3A-438C-B5D8-76BB4C5C0934}|AdmonBD.csproj|solutionrelative:models\\loginusuariomodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E0E116E4-6D3A-438C-B5D8-76BB4C5C0934}|AdmonBD.csproj|c:\\users\\vania\\onedrive\\documentos\\administracionbd\\appadmonbd\\admonbd\\views\\database\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E0E116E4-6D3A-438C-B5D8-76BB4C5C0934}|AdmonBD.csproj|solutionrelative:views\\database\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E0E116E4-6D3A-438C-B5D8-76BB4C5C0934}|AdmonBD.csproj|c:\\users\\vania\\onedrive\\documentos\\administracionbd\\appadmonbd\\admonbd\\views\\user\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{E0E116E4-6D3A-438C-B5D8-76BB4C5C0934}|AdmonBD.csproj|solutionrelative:views\\user\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{E0E116E4-6D3A-438C-B5D8-76BB4C5C0934}|AdmonBD.csproj|c:\\users\\vania\\onedrive\\documentos\\administracionbd\\appadmonbd\\admonbd\\models\\createdatabasemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E0E116E4-6D3A-438C-B5D8-76BB4C5C0934}|AdmonBD.csproj|solutionrelative:models\\createdatabasemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E0E116E4-6D3A-438C-B5D8-76BB4C5C0934}|AdmonBD.csproj|c:\\users\\vania\\onedrive\\documentos\\administracionbd\\appadmonbd\\admonbd\\views\\user\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{E0E116E4-6D3A-438C-B5D8-76BB4C5C0934}|AdmonBD.csproj|solutionrelative:views\\user\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{E0E116E4-6D3A-438C-B5D8-76BB4C5C0934}|AdmonBD.csproj|c:\\users\\vania\\onedrive\\documentos\\administracionbd\\appadmonbd\\admonbd\\views\\database\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E0E116E4-6D3A-438C-B5D8-76BB4C5C0934}|AdmonBD.csproj|solutionrelative:views\\database\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E0E116E4-6D3A-438C-B5D8-76BB4C5C0934}|AdmonBD.csproj|c:\\users\\vania\\onedrive\\documentos\\administracionbd\\appadmonbd\\admonbd\\views\\user\\createloginanduser.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{E0E116E4-6D3A-438C-B5D8-76BB4C5C0934}|AdmonBD.csproj|solutionrelative:views\\user\\createloginanduser.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{E0E116E4-6D3A-438C-B5D8-76BB4C5C0934}|AdmonBD.csproj|c:\\users\\vania\\onedrive\\documentos\\administracionbd\\appadmonbd\\admonbd\\controllers\\databasecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E0E116E4-6D3A-438C-B5D8-76BB4C5C0934}|AdmonBD.csproj|solutionrelative:controllers\\databasecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,81 +42,76 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "CreateLoginAndUser.cshtml",
-              "DocumentMoniker": "C:\\Users\\vania\\OneDrive\\Documentos\\AdministracionBD\\AppAdmonBD\\AdmonBD\\Views\\User\\CreateLoginAndUser.cshtml",
-              "RelativeDocumentMoniker": "Views\\User\\CreateLoginAndUser.cshtml",
-              "ToolTip": "C:\\Users\\vania\\OneDrive\\Documentos\\AdministracionBD\\AppAdmonBD\\AdmonBD\\Views\\User\\CreateLoginAndUser.cshtml",
-              "RelativeToolTip": "Views\\User\\CreateLoginAndUser.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAABqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-10T03:37:05.603Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\vania\\OneDrive\\Documentos\\AdministracionBD\\AppAdmonBD\\AdmonBD\\Views\\User\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\User\\Index.cshtml",
-              "ToolTip": "C:\\Users\\vania\\OneDrive\\Documentos\\AdministracionBD\\AppAdmonBD\\AdmonBD\\Views\\User\\Index.cshtml",
-              "RelativeToolTip": "Views\\User\\Index.cshtml",
-              "ViewState": "AgIAABcAAAAAAAAAAAAkwDAAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-10T02:49:27.649Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "C:\\Users\\vania\\OneDrive\\Documentos\\AdministracionBD\\AppAdmonBD\\AdmonBD\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "Controllers\\UserController.cs",
-              "ToolTip": "C:\\Users\\vania\\OneDrive\\Documentos\\AdministracionBD\\AppAdmonBD\\AdmonBD\\Controllers\\UserController.cs",
-              "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AgIAALEAAAAAAAAAAAAgwLgAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-10T02:41:12.511Z",
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\vania\\OneDrive\\Documentos\\AdministracionBD\\AppAdmonBD\\AdmonBD\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\vania\\OneDrive\\Documentos\\AdministracionBD\\AppAdmonBD\\AdmonBD\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-03-11T22:36:14.709Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "UserModel.cs",
-              "DocumentMoniker": "C:\\Users\\vania\\OneDrive\\Documentos\\AdministracionBD\\AppAdmonBD\\AdmonBD\\Models\\UserModel.cs",
-              "RelativeDocumentMoniker": "Models\\UserModel.cs",
-              "ToolTip": "C:\\Users\\vania\\OneDrive\\Documentos\\AdministracionBD\\AppAdmonBD\\AdmonBD\\Models\\UserModel.cs",
-              "RelativeToolTip": "Models\\UserModel.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAwAsAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-10T02:44:45.567Z",
-              "EditorCaption": ""
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\vania\\OneDrive\\Documentos\\AdministracionBD\\AppAdmonBD\\AdmonBD\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "appsettings.Development.json",
+              "ToolTip": "C:\\Users\\vania\\OneDrive\\Documentos\\AdministracionBD\\AppAdmonBD\\AdmonBD\\appsettings.Development.json",
+              "RelativeToolTip": "appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-03-11T22:36:05.982Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "LoginUsuarioModel.cs",
-              "DocumentMoniker": "C:\\Users\\vania\\OneDrive\\Documentos\\AdministracionBD\\AppAdmonBD\\AdmonBD\\Models\\LoginUsuarioModel.cs",
-              "RelativeDocumentMoniker": "Models\\LoginUsuarioModel.cs",
-              "ToolTip": "C:\\Users\\vania\\OneDrive\\Documentos\\AdministracionBD\\AppAdmonBD\\AdmonBD\\Models\\LoginUsuarioModel.cs",
-              "RelativeToolTip": "Models\\LoginUsuarioModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-10T02:44:44.369Z",
-              "EditorCaption": ""
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\vania\\OneDrive\\Documentos\\AdministracionBD\\AppAdmonBD\\AdmonBD\\Views\\Database\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Database\\Index.cshtml",
+              "ToolTip": "C:\\Users\\vania\\OneDrive\\Documentos\\AdministracionBD\\AppAdmonBD\\AdmonBD\\Views\\Database\\Index.cshtml",
+              "RelativeToolTip": "Views\\Database\\Index.cshtml",
+              "ViewState": "AgIAABkAAAAAAAAAAAAqwCgAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-11T22:21:24.408Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\vania\\OneDrive\\Documentos\\AdministracionBD\\AppAdmonBD\\AdmonBD\\Views\\Database\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\Database\\Create.cshtml",
+              "ToolTip": "C:\\Users\\vania\\OneDrive\\Documentos\\AdministracionBD\\AppAdmonBD\\AdmonBD\\Views\\Database\\Create.cshtml",
+              "RelativeToolTip": "Views\\Database\\Create.cshtml",
+              "ViewState": "AgIAACYAAAAAAAAAAAAqwDsAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-11T22:21:22.683Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\Users\\vania\\OneDrive\\Documentos\\AdministracionBD\\AppAdmonBD\\AdmonBD\\Views\\User\\Create.cshtml",
-              "RelativeDocumentMoniker": "Views\\User\\Create.cshtml",
-              "ToolTip": "C:\\Users\\vania\\OneDrive\\Documentos\\AdministracionBD\\AppAdmonBD\\AdmonBD\\Views\\User\\Create.cshtml",
-              "RelativeToolTip": "Views\\User\\Create.cshtml",
-              "ViewState": "AgIAACoAAAAAAAAAAAAAAEIAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-09T04:07:02.769Z",
-              "EditorCaption": ""
+              "Title": "CreateDataBaseModel.cs",
+              "DocumentMoniker": "C:\\Users\\vania\\OneDrive\\Documentos\\AdministracionBD\\AppAdmonBD\\AdmonBD\\Models\\CreateDataBaseModel.cs",
+              "RelativeDocumentMoniker": "Models\\CreateDataBaseModel.cs",
+              "ToolTip": "C:\\Users\\vania\\OneDrive\\Documentos\\AdministracionBD\\AppAdmonBD\\AdmonBD\\Models\\CreateDataBaseModel.cs",
+              "RelativeToolTip": "Models\\CreateDataBaseModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T22:21:18.469Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DatabaseController.cs",
+              "DocumentMoniker": "C:\\Users\\vania\\OneDrive\\Documentos\\AdministracionBD\\AppAdmonBD\\AdmonBD\\Controllers\\DatabaseController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DatabaseController.cs",
+              "ToolTip": "C:\\Users\\vania\\OneDrive\\Documentos\\AdministracionBD\\AppAdmonBD\\AdmonBD\\Controllers\\DatabaseController.cs",
+              "RelativeToolTip": "Controllers\\DatabaseController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T22:21:13.814Z"
             }
           ]
         }
