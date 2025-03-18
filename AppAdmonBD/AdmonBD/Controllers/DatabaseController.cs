@@ -27,8 +27,8 @@ namespace AdmonBD.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var databases = await GetDatabases();
-            return View(databases);
+            ViewBag.Databases = GetDatabases().Result;
+            return View();
         }
 
         [HttpPost]

@@ -62,3 +62,13 @@ BEGIN
         EXEC sp_executesql @SQL
     END
 END
+GO
+
+CREATE OR ALTER PROCEDURE sp_GetDatabases
+AS
+BEGIN
+	SELECT name as 'Nombre'
+	FROM sys.databases 
+	WHERE state_desc = 'ONLINE' AND name NOT IN ('tempdb', 'model', 'msdb', 'DWDiagnostics','DWConfiguration')
+END
+GO

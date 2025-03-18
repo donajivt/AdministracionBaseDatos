@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Crear Backup";
+}
+
+<div class="container">
+    <h2 class="mt-4">Crear Backup</h2>
+
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <div class="alert @(ViewBag.IsSuccess != null && ViewBag.IsSuccess ? "alert-success" : "alert-danger")">
+            @ViewBag.Message
+        </div>
+    }
+
+    <!-- Formulario para seleccionar base de datos y tipo de backup -->
+    <form asp-action="Create" method="post" class="needs-validation" novalidate>
+        <div class="form-group">
+            <label for="DatabaseName">Base de Datos</label>
+            <select name="DatabaseName" id="DatabaseName" class="form-control" required>
+                <option value="">Seleccione una base de datos</option>
+                @if (ViewBag.Databases != null)
+                {
+                    foreach (var dbName in ViewBag.Databases)
+                    {
+                        <option value="@dbName">@dbName</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="BackupType">Tipo de Backup</label>
+            <select name="BackupType" id="BackupType" class="form-control" required>
+                <option value="">Seleccione un tipo de backup</option>
+                <option value="FULL">Backup Completo</option>
+                <option value="DIFFERENTIAL">Backup Diferencial</option>
+                <option value="LOG">Backup de Log</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Realizar Backup</button>
+    </form>
+</div>

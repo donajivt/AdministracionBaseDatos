@@ -5,15 +5,21 @@ CREATE OR ALTER PROCEDURE sp_CreateLoginAndUser
     @Databases NVARCHAR(MAX) 
 AS
 BEGIN
-    -- Crear Login
+    SET NOCOUNT ON;
+
+    -- Validar si el login ya existe
     IF NOT EXISTS (SELECT 1 FROM sys.server_principals WHERE name = @LoginName)
     BEGIN
         EXEC sp_addlogin @LoginName, @Password;
     END
+    ELSE
+    BEGIN
+        PRINT 'El login ya existe: ' + @LoginName;
+    END
 
-    -- Crear el Usuario y asignarlo a las bases de datos
-    DECLARE @Database NVARCHAR(128)
-    DECLARE @SQL NVARCHAR(MAX)
+    -- Declaración de variables
+    DECLARE @Database NVARCHAR(128);
+    DECLARE @SQL NVARCHAR(MAX);
 
     DECLARE db_cursor CURSOR FOR
     SELECT value FROM STRING_SPLIT(@Databases, ',');
@@ -23,168 +29,171 @@ BEGIN
 
     WHILE @@FETCH_STATUS = 0
     BEGIN
-        -- Crear Usuario en la base de datos especifica
-        SET @SQL = 'USE ' + @Database + '; CREATE USER ' + @UserName + ' FOR LOGIN ' + @LoginName;
-        EXEC sp_executesql @SQL;
-
-        -- Asignar permisos basicos (por ejemplo, db_datareader y db_datawriter)
-        SET @SQL = 'USE ' + @Database + '; EXEC sp_addrolemember ''db_datareader'', ''' + @UserName + ''';';
-        EXEC sp_executesql @SQL;
-
-        SET @SQL = 'USE ' + @Database + '; EXEC sp_addrolemember ''db_datawriter'', ''' + @UserName + ''';';
-        EXEC sp_executesql @SQL;
-
+        -- Validar si la base de datos existe
+        IF EXISTS (SELECT 1 FROM sys.databases WHERE name = @Database)
+        BEGIN
+            SET @SQL = 'USE ' + QUOTENAME(@Database) + 
+                       '; IF NOT EXISTS (SELECT 1 FROM sys.database_principals WHERE name = ''' + @UserName + ''')
+                       BEGIN
+                           CREATE USER ' + QUOTENAME(@UserName) + ' FOR LOGIN ' + QUOTENAME(@LoginName) + '
+                       END
+                       ELSE
+                       BEGIN
+                           PRINT ''El usuario ya existe en la base de datos: ' + @Database + '''
+                       END';
+            EXEC sp_executesql @SQL;
+        END
+        ELSE
+        BEGIN
+            PRINT 'La base de datos no existe: ' + @Database;
+        END
+        
         FETCH NEXT FROM db_cursor INTO @Database;
     END
 
     CLOSE db_cursor;
     DEALLOCATE db_cursor;
 END
-GO 
+GO
 
 CREATE OR ALTER PROCEDURE sp_AssignServerPermissions
     @LoginName NVARCHAR(50),
-    @Permission NVARCHAR(50)
+    @Permissions NVARCHAR(MAX)
 AS
 BEGIN
-    DECLARE @SQL NVARCHAR(MAX);
+    SET NOCOUNT ON;
     
-    SET @SQL = 'GRANT ' + @Permission + ' TO [' + @LoginName + ']';
+    IF NOT EXISTS (SELECT 1 FROM sys.server_principals WHERE name = @LoginName)
+    BEGIN
+        PRINT 'El login no existe: ' + @LoginName;
+        RETURN;
+    END
     
-    EXEC sp_executesql @SQL;
+    DECLARE @Permission NVARCHAR(50);
+    DECLARE perm_cursor CURSOR FOR SELECT value FROM STRING_SPLIT(@Permissions, ',');
+    
+    OPEN perm_cursor;
+    FETCH NEXT FROM perm_cursor INTO @Permission;
+    
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        DECLARE @SQL NVARCHAR(MAX) = 'ALTER SERVER ROLE ' + @Permission + ' ADD MEMBER [' + @LoginName + ']';
+        EXEC sp_executesql @SQL;
+        FETCH NEXT FROM perm_cursor INTO @Permission;
+    END
+    
+    CLOSE perm_cursor;
+    DEALLOCATE perm_cursor;
 END
 GO
 
 CREATE OR ALTER PROCEDURE sp_AssignDatabasePermissions
     @UserName NVARCHAR(50),
     @DatabaseName NVARCHAR(50),
-    @Permission NVARCHAR(50)
+    @Permissions NVARCHAR(MAX)
 AS
 BEGIN
-    DECLARE @SQL NVARCHAR(MAX);
+    SET NOCOUNT ON;
     
-    SET @SQL = 'USE ' + @DatabaseName + '; GRANT ' + @Permission + ' TO [' + @UserName + ']';
-    
-    EXEC sp_executesql @SQL;
-END
-GO
-
-CREATE OR ALTER PROCEDURE sp_AssignTablePermissions
-    @UserName NVARCHAR(50),
-    @DatabaseName NVARCHAR(50),
-    @TableName NVARCHAR(50),
-    @Permission NVARCHAR(50)
-AS
-BEGIN
-    DECLARE @SQL NVARCHAR(MAX);
-    
-    SET @SQL = 'USE ' + @DatabaseName + '; GRANT ' + @Permission + ' ON ' + @TableName + ' TO [' + @UserName + ']';
-    
-    EXEC sp_executesql @SQL;
-END
-GO
-
-CREATE OR ALTER PROCEDURE sp_GetUserLoginDetails
-AS
-BEGIN
-    -- Obtener todos los logins y usuarios asociados, junto con las bases de datos asignadas
-    SELECT 
-        sp.name AS LoginName,
-        ISNULL(dp.name, 'N/A') AS UserName,
-        ISNULL((
-            SELECT STUFF((
-                SELECT ', ' + db.name
-                FROM sys.databases db
-                WHERE EXISTS (
-                    SELECT 1
-                    FROM sys.database_principals dbp
-                    WHERE dbp.sid = sp.sid
-                    AND dbp.name = dp.name
-                    AND dbp.type IN ('S', 'U')
-                )
-                FOR XML PATH(''), TYPE
-            ).value('(./text())[1]', 'NVARCHAR(MAX)'), 1, 2, '')
-        ), 'N/A') AS AssignedDatabases
-    FROM sys.server_principals sp
-    LEFT JOIN sys.database_principals dp 
-        ON sp.sid = dp.sid
-    WHERE sp.type IN ('S', 'U')
-    ORDER BY sp.name;
-END
-GO
-
-CREATE OR ALTER PROCEDURE sp_GetTablesForDatabase
-    @DatabaseName NVARCHAR(128)
-AS
-BEGIN
-    DECLARE @SQL NVARCHAR(MAX)
-
-    SET @SQL = 'USE ' + @DatabaseName + '; SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = ''BASE TABLE'';'
-
-    EXEC sp_executesql @SQL;
-END
-GO
-
--- Para obtener los permisos a nivel de servidor
-CREATE OR ALTER PROCEDURE sp_GetServerPermissions
-AS
-BEGIN
-    SELECT permission_name
-    FROM sys.server_permissions
-    WHERE class = 0 
-END
-GO
-
--- Para obtener los permisos a nivel de base de datos
-CREATE OR ALTER PROCEDURE sp_GetDatabasePermissions
-AS
-BEGIN
-    SELECT permission_name
-    FROM sys.database_permissions
-    WHERE class = 0 
-END
-GO
-
-
-CREATE OR ALTER PROCEDURE sp_AssignServerPermissions
-    @LoginName NVARCHAR(128),
-    @Permission NVARCHAR(128)
-AS
-BEGIN
-    DECLARE @SQL NVARCHAR(MAX);
-    
-    IF @Permission IN ('bulkadmin', 'dbcreator', 'diskadmin', 'processadmin', 'public', 'securityadmin', 'serveradmin', 'setupadmin', 'sysadmin')
+    IF NOT EXISTS (SELECT 1 FROM sys.databases WHERE name = @DatabaseName)
     BEGIN
-        SET @SQL = 'ALTER SERVER ROLE ' + QUOTENAME(@Permission) + ' ADD MEMBER ' + QUOTENAME(@LoginName);
+        PRINT 'La base de datos no existe: ' + @DatabaseName;
+        RETURN;
+    END
+    
+    DECLARE @Permission NVARCHAR(50);
+    DECLARE perm_cursor CURSOR FOR SELECT value FROM STRING_SPLIT(@Permissions, ',');
+    
+    OPEN perm_cursor;
+    FETCH NEXT FROM perm_cursor INTO @Permission;
+    
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        DECLARE @SQL NVARCHAR(MAX) = 'USE ' + QUOTENAME(@DatabaseName) + '; ALTER ROLE  ' + @Permission + ' ADD MEMBER [' + @UserName + ']';
         EXEC sp_executesql @SQL;
+        FETCH NEXT FROM perm_cursor INTO @Permission;
     END
-    ELSE
-    BEGIN
-        RAISERROR('Permiso no v�lido: %s', 16, 1, @Permission);
-    END
+    
+    CLOSE perm_cursor;
+    DEALLOCATE perm_cursor;
 END
 GO
 
-CREATE OR ALTER PROCEDURE sp_AssignDatabasePermissions
-    @UserName NVARCHAR(128),
-    @DatabaseName NVARCHAR(128),
-    @Permission NVARCHAR(128)
+-- OBTENER USUARIOS, LOGINS Y SUS BD CON SUS ROLES DE SERVIDOR Y BD
+CREATE OR ALTER PROCEDURE sp_GetAllUserRoles
 AS
 BEGIN
+    DECLARE @Database NVARCHAR(255);
     DECLARE @SQL NVARCHAR(MAX);
-    IF @Permission IN ('db_accessadmin', 'db_backupoperator', 'db_datareader', 'db_datawriter', 'db_ddladmin', 'db_denydatareader', 'db_denydatawriter', 'db_owner', 'db_securityadmin')
+
+    -- Crear tabla temporal para almacenar los resultados
+    CREATE TABLE #UserRoles (
+        DatabaseName NVARCHAR(255),
+        LoginName NVARCHAR(255),
+        UserName NVARCHAR(255),
+        DatabaseRoles NVARCHAR(MAX),
+        ServerRoles NVARCHAR(MAX)
+    );
+
+    -- Cursor para recorrer todas las bases de datos del servidor, excluyendo bases de datos del sistema
+    DECLARE db_cursor CURSOR FOR
+    SELECT name FROM sys.databases
+    WHERE state_desc = 'ONLINE'
+    AND name NOT IN ('tempdb', 'model', 'msdb', 'DWDiagnostics', 'DWConfiguration', 'DWQueue'); 
+
+    OPEN db_cursor;
+    FETCH NEXT FROM db_cursor INTO @Database;
+
+    WHILE @@FETCH_STATUS = 0
     BEGIN
-        SET @SQL = 'USE ' + QUOTENAME(@DatabaseName) + '; EXEC sp_addrolemember @rolename = ' + QUOTENAME(@Permission) + ', @membername = ' + QUOTENAME(@UserName);
+        -- Construir la consulta dinámica en cada base de datos
+        SET @SQL = N'
+            USE [' + @Database + '];
+            INSERT INTO #UserRoles (DatabaseName, LoginName, UserName, DatabaseRoles, ServerRoles)
+            SELECT 
+                DB_NAME() AS DatabaseName,
+                sp.name AS LoginName,
+                dp.name AS UserName,
+                ISNULL(STUFF(( 
+                    SELECT '','' + dr.name 
+                    FROM sys.database_role_members drm
+                    JOIN sys.database_principals dr ON drm.role_principal_id = dr.principal_id
+                    WHERE drm.member_principal_id = dp.principal_id
+                    FOR XML PATH(''''), TYPE).value(''(./text())[1]'', ''NVARCHAR(MAX)''), 1, 2, ''''), ''N/A'') AS DatabaseRoles,
+                ISNULL(STUFF(( 
+                    SELECT '','' + sr.name 
+                    FROM sys.server_role_members srm
+                    JOIN sys.server_principals sr ON srm.role_principal_id = sr.principal_id
+                    WHERE srm.member_principal_id = sp.principal_id
+                    FOR XML PATH(''''), TYPE).value(''(./text())[1]'', ''NVARCHAR(MAX)''), 1, 2, ''''), ''N/A'') AS ServerRoles
+            FROM sys.database_principals dp
+            INNER JOIN sys.server_principals sp ON dp.sid = sp.sid
+            WHERE dp.type IN (''S'', ''U'')
+            AND sp.name NOT IN (
+                ''##MS_PolicyEventProcessingLogin##'',
+                ''##MS_PolicyTsqlExecutionLogin##'',
+                ''NT AUTHORITY\NETWORK SERVICE'',
+                ''NT AUTHORITY\SYSTEM'',
+                ''NT Service\MSSQLSERVER'',
+                ''NT SERVICE\SQLSERVERAGENT'',
+                ''NT SERVICE\SQLTELEMETRY'',
+                ''NT SERVICE\SQLWriter'',
+                ''NT SERVICE\Winmgmt''
+            );';
+
         EXEC sp_executesql @SQL;
-    END
-    ELSE IF @Permission = 'public'
-    BEGIN
-        -- No hacer nada, ya que todos los usuarios pertenecen autom�ticamente al rol 'public'
-        PRINT 'El rol "public" no puede ser asignado manualmente.';
-    END
-    ELSE
-    BEGIN
-        RAISERROR('Permiso no v�lido: %s', 16, 1, @Permission);
-    END
-END
+
+        FETCH NEXT FROM db_cursor INTO @Database;
+    END;
+
+    CLOSE db_cursor;
+    DEALLOCATE db_cursor;
+
+    -- Mostrar los resultados
+    SELECT * FROM #UserRoles;
+
+    -- Eliminar la tabla temporal
+    DROP TABLE #UserRoles;
+END;
 GO
+

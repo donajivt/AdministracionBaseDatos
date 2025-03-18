@@ -1,8 +1,61 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Bienvenido a AdmonBD";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .hero {
+            max-width: 100%;
+            padding: 50px;
+            background: linear-gradient(135deg, #d800ff, #007cff);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+            .hero h1 {
+                font-size: 3rem;
+                font-weight: 600;
+                color:black;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+                color: black;
+                margin-bottom: 30px;
+            }
+
+        .button {
+            display: inline-block;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: white;
+            background: #008bff;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: 0.3s ease;
+        }
+
+            .button:hover {
+                background: #008b58;
+            }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Bienvenido a AdmonBD</h1>
+        <p>Optimiza y gestiona tus bases de datos con facilidad.</p>
+        <a href="https://github.com/donajivt/AdministracionBaseDatos" class="button" target="_blank">Ver en GitHub</a>
+    </div>
+</body>
+</html>

@@ -1,7 +1,6 @@
-﻿@model List<AdmonBD.Models.UserModel>
-
+﻿@model List<AdmonBD.Models.UserPermissionModel>
 @{
-    ViewBag.Title = "Gestión de Usuarios";
+    ViewData["Title"] = "Gestión de Usuarios";
 }
 
 <div class="container">
@@ -13,37 +12,52 @@
             @ViewBag.Message
         </div>
     }
+
     <div class="mb-3">
         <a href="@Url.Action("Create", "User")" class="btn btn-primary">Crear Nuevo Usuario y Login</a>
     </div>
 
-    <!-- Tabla de usuarios -->
-    <table class="table table-striped mt-4">
-        <thead>
-            <tr>
-                <th>Login</th>
-                <th>Usuario</th>
-                <th>Bases de Datos</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model != null && Model.Any())
-            {
-                @foreach (var user in Model)
-                {
-                    <tr>
-                        <td>@user.LoginName</td>
-                        <td>@user.UserName</td>
-                        <td>@(user.AssignedDatabases != null ? string.Join(", ", user.AssignedDatabases) : "N/A")</td>
-                    </tr>
-                }
-            }
-            else
-            {
+    <div class="table-responsive">
+        @* Hace la tabla desplazable en pantallas pequeñas *@
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
                 <tr>
-                    <td colspan="3" class="text-center">No hay usuarios registrados.</td>
+                    <th style="min-width: 150px;">Base de Datos</th>
+                    <th style="min-width: 150px;">Logins</th>
+                    <th style="min-width: 150px;">Usuarios</th>
+                    <th style="min-width: 200px;">Database Roles</th>
+                    <th style="min-width: 200px;">Server Roles</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var group in Model.GroupBy(u => u.DatabaseName))
+                {
+                    bool firstRow = true;
+                    int rowCount = group.Count();
+
+                    foreach (var user in group)
+                    {
+                        <tr>
+                            @if (firstRow)
+                            {
+                                <td rowspan="@rowCount" class="align-middle">@group.Key</td>
+                                firstRow = false;
+                            }
+                            <td class="text-nowrap">@user.LoginName</td>
+                            <td class="text-nowrap">@user.UserName</td>
+                            <td class="text-break">@user.DatabaseRoles</td>
+                            <td class="text-break">@user.ServerRoles</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
+<style>
+    .text-break {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+    }
+</style>

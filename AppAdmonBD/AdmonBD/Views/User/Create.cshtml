@@ -28,11 +28,6 @@
             <div class="invalid-feedback">Debe seleccionar al menos una base de datos.</div>
         </div>
         <div class="mb-3">
-            <label class="form-label">Seleccionar Tablas</label>
-            <select id="TableSelect" asp-for="AssignedTables" class="form-control" multiple>
-            </select>
-        </div>
-        <div class="mb-3">
             <label class="form-label">Permisos a Nivel de Servidor</label>
             <select asp-for="ServerPermissions" asp-items="@(new SelectList(ViewBag.ServerPermissions))" class="form-control" multiple>
             </select>

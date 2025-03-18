@@ -23,8 +23,8 @@ namespace AdmonBD.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var users = await GetUsersAndLogins();
-            return View(users);
+            var userPermissions = await GetUserPermissions();
+            return View(userPermissions);
         }
 
         // Mostrar formulario para crear un nuevo usuario
@@ -68,7 +68,7 @@ namespace AdmonBD.Controllers
                             CommandType = CommandType.StoredProcedure
                         };
                         serverPermissionCmd.Parameters.AddWithValue("@LoginName", model.LoginName);
-                        serverPermissionCmd.Parameters.AddWithValue("@Permission", permission);
+                        serverPermissionCmd.Parameters.AddWithValue("@Permissions", permission);
                         await serverPermissionCmd.ExecuteNonQueryAsync();
                     }
 
@@ -83,7 +83,7 @@ namespace AdmonBD.Controllers
                             };
                             dbPermissionCmd.Parameters.AddWithValue("@UserName", model.UserName);
                             dbPermissionCmd.Parameters.AddWithValue("@DatabaseName", db);
-                            dbPermissionCmd.Parameters.AddWithValue("@Permission", dbPermission);
+                            dbPermissionCmd.Parameters.AddWithValue("@Permissions", dbPermission);
                             await dbPermissionCmd.ExecuteNonQueryAsync();
                         }
                     }
@@ -156,69 +156,37 @@ namespace AdmonBD.Controllers
             return permissions;
         }
 
-        // Obtener los usuarios y logins existentes
-        private async Task<List<UserModel>> GetUsersAndLogins()
+        // Obtener permisos de los usuarios en todas las bases de datos
+        private async Task<List<UserPermissionModel>> GetUserPermissions()
         {
-            var users = new List<UserModel>();
+            var users = new List<UserPermissionModel>();
+
             using (var connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
-                var command = new SqlCommand("sp_GetUserLoginDetails", connection)
+                var command = new SqlCommand("sp_GetAllUserRoles", connection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
+
                 using (var reader = await command.ExecuteReaderAsync())
                 {
                     while (await reader.ReadAsync())
                     {
-                        var user = new UserModel
+                        var user = new UserPermissionModel
                         {
+                            DatabaseName = reader["DatabaseName"].ToString(),
                             LoginName = reader["LoginName"].ToString(),
                             UserName = reader["UserName"].ToString(),
-                            AssignedDatabases = reader["AssignedDatabases"].ToString().Split(',').ToList()
+                            DatabaseRoles = reader["DatabaseRoles"].ToString(),
+                            ServerRoles = reader["ServerRoles"].ToString()
                         };
                         users.Add(user);
                     }
                 }
             }
+
             return users;
-        }
-        [HttpGet]
-        public IActionResult GetTablesForDatabase(string databaseName)
-        {
-            if (string.IsNullOrEmpty(databaseName))
-            {
-                return BadRequest("El nombre de la base de datos es requerido.");
-            }
-
-            var tables = new List<string>();
-
-            try
-            {
-                using (var connection = new SqlConnection(_connectionString))
-                {
-                    connection.Open();
-                    var command = new SqlCommand("sp_GetTablesForDatabase", connection)
-                    {
-                        CommandType = CommandType.StoredProcedure
-                    };
-                    command.Parameters.AddWithValue("@DatabaseName", databaseName);
-
-                    using (var reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            tables.Add(reader.GetString(0));
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                return BadRequest($"Error al obtener las tablas: {ex.Message}");
-            }
-
-            return Json(tables);
         }
     }
 }

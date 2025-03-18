@@ -1,0 +1,71 @@
+﻿@model List<AdmonBD.Models.BackupModel>
+
+@{
+    ViewBag.Title = "Gestión de Backups";
+}
+
+<div class="container">
+    <h2 class="mt-4">Gestión de Backups</h2>
+
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <div class="alert @(ViewBag.IsSuccess ? "alert-success" : "alert-danger")">
+            @ViewBag.Message
+        </div>
+    }
+    <div class="mb-3">
+        <img src="https://sqlbak.com/blog/wp-content/uploads/2013/10/database3.jpg"
+        alt="Backup Imagen" class="img-fluid mb-3" />
+    </div>
+    <div class="mb-3">
+        <a href="@Url.Action("Create", "Backup")" class="btn btn-primary">Crear Nuevo Backup</a>
+    </div>
+
+    <!-- Tabla de bases de datos -->
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th>Nombre de la Base de Datos</th>
+                <th>Tipo de Backup</th>
+                <th>Fecha de Inicio</th>
+                <th>Fecha de Fin</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                var groupedDatabases = Model
+                .GroupBy(db => db.DatabaseName)
+                .ToList();
+
+                foreach (var databaseGroup in groupedDatabases)
+                {
+                    var firstDatabase = databaseGroup.First(); // Obtener el primer backup de la base de datos
+
+                    // Fila con solo el nombre de la base de datos
+                    <tr>
+                        <td rowspan="@databaseGroup.Count()"> @firstDatabase.DatabaseName </td>
+                        <td>@firstDatabase.BackupType</td>
+                        <td>@firstDatabase.BackupStartDate</td>
+                        <td>@firstDatabase.BackupFinishDate</td>
+                    </tr>
+
+                    foreach (var backup in databaseGroup.Skip(1))
+                    {
+                        <tr>
+                            <td>@backup.BackupType</td>
+                            <td>@backup.BackupStartDate</td>
+                            <td>@backup.BackupFinishDate</td>
+                        </tr>
+                    }
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4" class="text-center">No hay bases de datos registradas.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
