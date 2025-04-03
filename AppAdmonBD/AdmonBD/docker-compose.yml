@@ -1,0 +1,27 @@
+version: '3.9'
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: donaji
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+    volumes:
+      - mongodb_data:/data/db
+
+  webapp:
+    build: .
+    container_name: aspnet_app
+    restart: always
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongodb
+    environment:
+      - ConnectionStrings__MongoDB=mongodb://donaji:123456@host.docker.internal:27017/admin
+
+volumes:
+  mongodb_data:

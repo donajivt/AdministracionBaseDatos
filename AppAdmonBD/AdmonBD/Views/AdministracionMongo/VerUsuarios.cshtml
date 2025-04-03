@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Ver Usuarios";
+}
+
+<h1>Usuarios</h1>
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Mensaje"]
+    </div>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Roles</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var usuario in Model)
+        {
+            <tr>
+                <td>@usuario["user"]</td> <!-- Asumiendo que la propiedad del nombre de usuario es "user" -->
+                <td>
+                    @* Mostrar roles como una lista separada por comas *@
+                    @{
+                        var roles = new List<string>();
+                        foreach (var role in usuario["roles"].AsBsonArray)
+                        {
+                            roles.Add(role["role"].AsString);
+                        }
+                    }
+                    @string.Join(", ", roles) <!-- Mostrar roles separados por comas -->
+                </td>
+                <td>
+                    <form method="post" asp-action="EliminarUsuario" asp-route-usuario="@usuario["user"]" onsubmit="return confirm('¿Estás seguro de eliminar este usuario?');">
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="@Url.Action("CrearUsuario", "AdministracionMongo")" class="btn btn-primary">Crear Nuevo Usuario</a>
+<a href="@Url.Action("Index", "AdministracionMongo")" class="btn btn-outline-danger">Regresar</a>

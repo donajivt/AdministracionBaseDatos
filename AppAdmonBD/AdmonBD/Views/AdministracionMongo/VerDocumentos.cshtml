@@ -1,0 +1,38 @@
+﻿@using MongoDB.Bson
+@model List<MongoDB.Bson.BsonDocument>
+@{
+    ViewData["Title"] = "Documentos en la Colección";
+    var nombreBase = ViewBag.NombreBase;
+    var nombreColeccion = ViewBag.NombreColeccion;
+}
+
+<div class="container">
+    <h2 class="mt-4">Documentos en @nombreColeccion (Base: @nombreBase)</h2>
+
+    <a href="@Url.Action("Gestionar", "AdministracionMongo", new { nombreBase })" class="btn btn-outline-danger mb-3">Regresar</a>
+
+    @if (Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>JSON</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var doc in Model)
+                    {
+                        <tr>
+                            <td><pre>@doc.ToJson(new MongoDB.Bson.IO.JsonWriterSettings { Indent = true })</pre></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">No hay documentos en esta colección.</div>
+    }
+</div>

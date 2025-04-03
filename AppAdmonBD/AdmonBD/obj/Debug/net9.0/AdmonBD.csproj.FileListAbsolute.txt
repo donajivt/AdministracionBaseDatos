@@ -129,10 +129,15 @@ C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Debug
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.AdmonBD.props
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.AdmonBD.props
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Debug\net9.0\staticwebassets.pack.json
-C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Debug\net9.0\AdmonBD.csproj.Up2Date
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Debug\net9.0\AdmonBD.dll
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Debug\net9.0\refint\AdmonBD.dll
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Debug\net9.0\AdmonBD.pdb
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Debug\net9.0\AdmonBD.genruntimeconfig.cache
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Debug\net9.0\ref\AdmonBD.dll
+C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\bin\Debug\net9.0\DnsClient.dll
+C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\bin\Debug\net9.0\MongoDB.Bson.dll
+C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\bin\Debug\net9.0\MongoDB.Driver.dll
+C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\bin\Debug\net9.0\SharpCompress.dll
+C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\bin\Debug\net9.0\Snappier.dll
+C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\bin\Debug\net9.0\ZstdSharp.dll

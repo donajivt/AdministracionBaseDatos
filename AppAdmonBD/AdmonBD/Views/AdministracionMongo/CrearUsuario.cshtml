@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Crear Usuario";
+}
+
+<h1>Crear Nuevo Usuario</h1>
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Mensaje"]
+    </div>
+}
+
+<form method="post" asp-action="CrearUsuario">
+    <div class="form-group">
+        <label for="usuario">Usuario</label>
+        <input type="text" class="form-control" id="usuario" name="usuario" required />
+    </div>
+
+    <div class="form-group">
+        <label for="contraseña">Contraseña</label>
+        <input type="password" class="form-control" id="contraseña" name="contraseña" required />
+    </div>
+
+    <div class="form-group">
+        <label for="roles">Roles (selecciona más de uno si es necesario)</label>
+        <select class="form-control" id="roles" name="roles" multiple required>
+            <!-- Aquí se agregan los roles disponibles -->
+            @foreach (var role in ViewBag.RolesDisponibles)
+            {
+                <option value="@role">@role</option>
+            }
+        </select>
+        <small class="form-text text-muted">Mantén presionada la tecla Ctrl o Shift para seleccionar varios roles.</small>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Crear Usuario</button>
+    <a href="@Url.Action("VerUsuarios", "AdministracionMongo")" class="btn btn-outline-danger">Cancelar</a>
+</form>

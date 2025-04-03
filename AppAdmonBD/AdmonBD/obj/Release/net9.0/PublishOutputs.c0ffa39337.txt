@@ -7,6 +7,7 @@ C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Relea
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\PubTmp\Out\AdmonBD.pdb
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\PubTmp\Out\Azure.Core.dll
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\PubTmp\Out\Azure.Identity.dll
+C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\PubTmp\Out\DnsClient.dll
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\PubTmp\Out\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\PubTmp\Out\Microsoft.Bcl.Cryptography.dll
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\PubTmp\Out\Microsoft.Data.SqlClient.dll
@@ -19,11 +20,16 @@ C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Relea
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\PubTmp\Out\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\PubTmp\Out\Microsoft.IdentityModel.Tokens.dll
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\PubTmp\Out\Microsoft.SqlServer.Server.dll
+C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\PubTmp\Out\MongoDB.Bson.dll
+C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\PubTmp\Out\MongoDB.Driver.dll
+C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\PubTmp\Out\SharpCompress.dll
+C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\PubTmp\Out\Snappier.dll
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\PubTmp\Out\System.ClientModel.dll
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\PubTmp\Out\System.Configuration.ConfigurationManager.dll
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\PubTmp\Out\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\PubTmp\Out\System.Memory.Data.dll
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\PubTmp\Out\System.Security.Cryptography.ProtectedData.dll
+C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\PubTmp\Out\ZstdSharp.dll
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\PubTmp\Out\cs\Microsoft.Data.SqlClient.resources.dll
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\PubTmp\Out\de\Microsoft.Data.SqlClient.resources.dll
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\PubTmp\Out\es\Microsoft.Data.SqlClient.resources.dll

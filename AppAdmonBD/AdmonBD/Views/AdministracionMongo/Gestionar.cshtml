@@ -1,0 +1,160 @@
+﻿@model List<string>
+@{
+    ViewData["Title"] = "Gestión de Base: " + ViewBag.NombreBase;
+    var nombreBase = ViewBag.NombreBase;
+    var colecciones = ViewBag.Colecciones as List<string>;
+}
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-info">
+        @TempData["Mensaje"]
+    </div>
+}
+
+<div class="container mt-4">
+    <h2 class=""><i class="bi bi-folder"></i> Gestión de Base: @nombreBase</h2>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crearColeccionModal">
+            <i class="bi bi-plus-lg"></i> Crear Colección
+        </button>
+        <a href="@Url.Action("Index", "AdministracionMongo")" class="btn btn-outline-danger mb-3">Regresar</a>
+    </div>
+    <h3 class="text-secondary">📂 Colecciones:</h3>
+    @if (Model.Count > 0)
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>Nombre de la Colección</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var col in Model)
+                    {
+                        <tr>
+                            <td class="fw-bold">@col</td>
+                            <td class="text-center">
+                                <form method="post" action="@Url.Action("EliminarColeccion", "AdministracionMongo")"
+                                      onsubmit="return confirm('¿Eliminar la colección @col?');">
+                                    <a href="@Url.Action("VerDocumentos", "AdministracionMongo", new { nombreBase = nombreBase, nombreColeccion = col })" class="btn btn-sm btn-info">
+                                        <i class="bi bi-eye"></i> Ver Documentos
+                                    </a>
+                                    <input type="hidden" name="nombreBase" value="@nombreBase" />
+                                    <input type="hidden" name="nombreColeccion" value="@col" />
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        <i class="bi bi-trash"></i> Eliminar
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">No hay colecciones en esta base de datos.</div>
+    }
+
+    <h3 class="text-secondary">📝 Insertar Documento:</h3>
+    <form method="post" action="/AdministracionMongo/InsertarDocumento" id="formInsertarDocumento">
+        <input type="hidden" name="nombreBase" value="@nombreBase" />
+
+        <!-- Selección de la Colección -->
+        <div class="row g-3 mb-3">
+            <div class="col-md-6">
+                <label class="form-label">Seleccionar Colección:</label>
+                <select name="nombreColeccion" class="form-control" required>
+                    <option value="" disabled selected>Seleccione una colección</option>
+                    @if (colecciones != null && colecciones.Count > 0) // Verifica que colecciones no esté vacío
+                    {
+                        @foreach (var coleccion in colecciones)
+                        {
+                            <option value="@coleccion">@coleccion</option>
+                        }
+                    }
+                    else
+                    {
+                        <option disabled>No hay colecciones disponibles</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <!-- Contenedor para los pares clave-valor -->
+        <div id="claveValorContainer">
+            <div class="row g-3 mb-3" id="row1">
+                <div class="col-md-5">
+                    <label class="form-label">Clave:</label>
+                    <input type="text" name="clave[]" class="form-control" required />
+                </div>
+                <div class="col-md-5">
+                    <label class="form-label">Valor:</label>
+                    <input type="text" name="valor[]" class="form-control" required />
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-danger btn-remove" style="margin-top: 32px;" onclick="removeRow(this)">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Botón para agregar nuevas filas de clave-valor -->
+            <div class="text-end mt-3 col-8">
+                <button type="button" class="btn btn-outline-primary" onclick="addRow()">Agregar otro campo</button>
+            </div>
+
+            <!-- Botón de envío del formulario -->
+            <div class="text-end mt-3 col-3">
+                <button type="submit" class="btn btn-primary">Insertar Documento</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal fade" id="crearColeccionModal" tabindex="-1" aria-labelledby="crearColeccionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="crearColeccionModalLabel">Crear Nueva Colección</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/AdministracionMongo/CrearColeccion">
+                    <input type="hidden" name="nombreBase" value="@nombreBase" />
+                    <div class="mb-3">
+                        <label class="form-label">Nombre de la Colección:</label>
+                        <input type="text" name="nombreColeccion" class="form-control" required />
+                    </div>
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Función para agregar una nueva fila de clave-valor
+    function addRow() {
+        // Obtiene el contenedor de las filas
+        const container = document.getElementById("claveValorContainer");
+        // Clona la primera fila para crear una nueva
+        const newRow = document.getElementById("row1").cloneNode(true);
+        // Asigna un nuevo ID a la fila clonada para evitar conflictos
+        newRow.id = "row" + (container.children.length + 1);
+        // Limpia los valores de los inputs
+        newRow.querySelectorAll("input").forEach(input => input.value = "");
+        // Añade la nueva fila al contenedor
+        container.appendChild(newRow);
+    }
+
+    // Función para eliminar una fila
+    function removeRow(button) {
+        const row = button.closest(".row");
+        row.remove();
+    }
+</script>

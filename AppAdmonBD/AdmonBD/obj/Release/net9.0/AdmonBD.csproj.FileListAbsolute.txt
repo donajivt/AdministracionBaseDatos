@@ -136,3 +136,9 @@ C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Relea
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\AdmonBD.pdb
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\AdmonBD.genruntimeconfig.cache
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Release\net9.0\ref\AdmonBD.dll
+C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\bin\Release\net9.0\DnsClient.dll
+C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\bin\Release\net9.0\MongoDB.Bson.dll
+C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\bin\Release\net9.0\MongoDB.Driver.dll
+C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\bin\Release\net9.0\SharpCompress.dll
+C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\bin\Release\net9.0\Snappier.dll
+C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\bin\Release\net9.0\ZstdSharp.dll

@@ -69,6 +69,6 @@ AS
 BEGIN
 	SELECT name as 'Nombre'
 	FROM sys.databases 
-	WHERE state_desc = 'ONLINE' AND name NOT IN ('tempdb', 'model', 'msdb', 'DWDiagnostics','DWConfiguration')
+	WHERE state_desc = 'ONLINE' AND name NOT IN ('tempdb', 'model', 'msdb', 'DWDiagnostics','DWConfiguration', 'DWQueue')
 END
 GO

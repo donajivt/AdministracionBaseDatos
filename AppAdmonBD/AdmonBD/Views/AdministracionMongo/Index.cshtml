@@ -1,0 +1,142 @@
+﻿@model List<AdmonBD.Models.BaseConColecciones>
+@{
+    ViewData["Title"] = "Administración de MongoDB";
+    var backupsDisponibles = ViewBag.backupsDisponibles;
+}
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-info">
+        @TempData["Mensaje"]
+    </div>
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class=""><i class="bi bi-database"></i> Administración de MongoDB</h2>
+    </div>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <button class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#crearBaseModal">
+            <i class="bi bi-plus-lg"></i> Crear Base de Datos
+        </button>
+        <!-- Botón para restaurar base de datos -->
+        <button class="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#restaurarBaseModal">
+            <i class="bi bi-upload"></i> Restaurar Base de Datos
+        </button>
+        <!-- Botón de Ver Usuarios -->
+        <a href="@Url.Action("VerUsuarios", "AdministracionMongo")" class="btn btn-primary m-1">
+            <i class="bi bi-person"></i> Administrar Usuarios
+        </a>
+    </div>
+
+    @if (Model.Count > 0)
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>Base de Datos</th>
+                        <th>Colecciones</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var baseConColecciones in Model)
+                    {
+                        <tr>
+                            <td class="fw-bold text-primary">@baseConColecciones.NombreBase</td>
+                            <td>
+                                <ul>
+                                    @foreach (var coleccion in baseConColecciones.Colecciones)
+                                    {
+                                        <li>@coleccion</li>
+                                    }
+                                </ul>
+                            </td>
+                            <td class="text-center">
+                                <!-- Botón de Gestionar -->
+                                <a href="@Url.Action("Gestionar", "AdministracionMongo", new { nombreBase = baseConColecciones.NombreBase })" class="btn btn-sm btn-info">
+                                    <i class="bi bi-gear"></i> Gestionar
+                                </a>
+
+                                <!-- Botón de Backup -->
+                                <form method="post" action="@Url.Action("Backup", "AdministracionMongo")" class="d-inline">
+                                    <input type="hidden" name="nombreBase" value="@baseConColecciones.NombreBase" />
+                                    <button type="submit" class="btn btn-sm btn-primary" onclick="return confirm('¿Realizar backup de la base de datos @baseConColecciones.NombreBase?');">
+                                        <i class="bi bi-download"></i> Backup
+                                    </button>
+                                </form>
+                                <!-- Formulario para eliminar base de datos -->
+                                <form method="post" action="@Url.Action("EliminarBaseDeDatos", "AdministracionMongo")" class="d-inline">
+                                    <input type="hidden" name="nombreBase" value="@baseConColecciones.NombreBase" />
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar la base de datos @baseConColecciones.NombreBase?');">
+                                        <i class="bi bi-trash"></i> Eliminar
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">No hay bases de datos registradas.</div>
+    }
+</div>
+
+<!-- Modal para seleccionar y restaurar base de datos -->
+<div class="modal fade" id="restaurarBaseModal" tabindex="-1" aria-labelledby="restaurarBaseModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="restaurarBaseModalLabel">Restaurar Base de Datos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="@Url.Action("Restaurar", "AdministracionMongo")">
+                    <div class="mb-3">
+                        <label class="form-label">Selecciona la Base de Datos a Restaurar:</label>
+                        <select name="nombreBase" class="form-select" required>
+                            <option value="">Selecciona una base de datos</option>
+                            @foreach (var backup in backupsDisponibles)
+                            {
+                                <option value="@backup">@backup</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-success">
+                            <i class="bi bi-save"></i> Restaurar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal para crear base de datos -->
+<div class="modal fade" id="crearBaseModal" tabindex="-1" aria-labelledby="crearBaseModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="crearBaseModalLabel">Crear Nueva Base de Datos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/AdministracionMongo/CrearBaseDeDatos">
+                    <div class="mb-3">
+                        <label class="form-label">Nombre de la Base de Datos:</label>
+                        <input type="text" name="nombreBase" class="form-control" required />
+                    </div>
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-success"><i class="bi bi-save"></i> Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
