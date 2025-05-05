@@ -222,5 +222,38 @@ namespace AdmonBD.Controllers
             var usuarios = _mongoService.ObtenerUsuarios();
             return View(usuarios);
         }
+        [HttpPost]
+        public IActionResult ExportarColeccion(string nombreBase, string nombreColeccion)
+        {
+            try
+            {
+                var rutaDestino = "/backup";
+                _mongoService.ExportarColeccion(nombreBase, nombreColeccion, rutaDestino);
+                TempData["Mensaje"] = $"Colección '{nombreColeccion}' exportada correctamente.";
+            }
+            catch (Exception ex)
+            {
+                TempData["Mensaje"] = "Error al exportar la colección: " + ex.Message;
+            }
+
+            return RedirectToAction("Gestionar", new { nombreBase });
+        }
+        [HttpPost]
+        public IActionResult ImportarColeccion(string nombreBase, string nombreColeccion)
+        {
+            try
+            {
+                var rutaBackup = "/backup";
+                _mongoService.ImportarColeccion(nombreBase, nombreColeccion, rutaBackup);
+                TempData["Mensaje"] = $"Colección '{nombreColeccion}' importada correctamente.";
+            }
+            catch (Exception ex)
+            {
+                TempData["Mensaje"] = "Error al importar la colección: " + ex.Message;
+            }
+
+            return RedirectToAction("Gestionar", new { nombreBase });
+        }
+
     }
 }

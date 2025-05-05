@@ -141,3 +141,4 @@ C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\bin\Debug
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\bin\Debug\net9.0\SharpCompress.dll
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\bin\Debug\net9.0\Snappier.dll
 C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\bin\Debug\net9.0\ZstdSharp.dll
+C:\Users\vania\OneDrive\Documentos\AdministracionBD\AppAdmonBD\AdmonBD\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

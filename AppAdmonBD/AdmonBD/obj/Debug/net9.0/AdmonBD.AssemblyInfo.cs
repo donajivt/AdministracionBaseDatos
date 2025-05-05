@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AdmonBD")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8a0094746bf022187892f6a8a9965dbd3a551213")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+abd44eba1db5df430cf2e466c6429c909c313d45")]
 [assembly: System.Reflection.AssemblyProductAttribute("AdmonBD")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AdmonBD")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

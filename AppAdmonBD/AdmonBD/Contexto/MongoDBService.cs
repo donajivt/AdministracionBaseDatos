@@ -183,5 +183,21 @@ namespace AdmonBD.Contexto
             var result = db.RunCommand<BsonDocument>(command);
             return result["users"].AsBsonArray.Select(user => user.AsBsonDocument).ToList();
         }
+        public void ExportarColeccion(string nombreBase, string nombreColeccion, string rutaDestino)
+        {
+            var comando = $"docker exec {DockerContainerName} mongodump --db {nombreBase} --collection {nombreColeccion} --out {rutaDestino} --username donaji --password 123456 --authenticationDatabase admin";
+            EjecutarComando(comando);
+            CopiarBackupDesdeContenedor(rutaDestino, nombreBase);
+        }
+        public void ImportarColeccion(string nombreBase, string nombreColeccion, string rutaBackup)
+        {
+            var rutaCompleta = Path.Combine(rutaBackup, nombreBase, nombreColeccion + ".bson");
+            if (!File.Exists(rutaCompleta))
+                throw new FileNotFoundException($"No se encontró el archivo de respaldo para la colección {nombreColeccion}.");
+
+            var comando = $"docker exec {DockerContainerName} mongorestore --db {nombreBase} --collection {nombreColeccion} {rutaBackup}/{nombreBase}/{nombreColeccion}.bson --username donaji --password 123456 --authenticationDatabase admin";
+            EjecutarComando(comando);
+        }
+
     }
 }
